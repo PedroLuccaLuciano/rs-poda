@@ -71,11 +71,18 @@ export const Route = createFileRoute("/")({
           "Poda em altura, remoção de árvores e roçada de terrenos em Joinville, Araquari e região. Orçamento gratuito pelo WhatsApp.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://rspoda.com.br/" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:site_name", content: "RS Poda" },
       { property: "og:image", content: `https://rspoda.com.br${equipe.url}` },
+      { property: "og:image:alt", content: "Equipe da RS Poda em serviço de poda de árvores em Joinville" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: `https://rspoda.com.br${equipe.url}` },
     ],
-    links: [{ rel: "preload", as: "image", href: equipe.url, fetchPriority: "high" }],
+    links: [
+      { rel: "canonical", href: "https://rspoda.com.br/" },
+      { rel: "preload", as: "image", href: equipe.url, fetchPriority: "high" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
