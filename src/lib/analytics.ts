@@ -101,3 +101,18 @@ export function trackPhoneClick(location: string) {
     /* analytics nunca deve quebrar a navegação */
   }
 }
+
+/** Evento de conversão para cliques em e-mail. */
+export function trackEmailClick(location: string) {
+  const payload = { event: "email_click", location, channel: "email" };
+  try {
+    window.dataLayer?.push(payload);
+    window.gtag?.("event", "email_click", {
+      event_category: "conversao",
+      event_label: location,
+    });
+    window.fbq?.("track", "Contact", { content_name: location, channel: "email" });
+  } catch {
+    /* analytics nunca deve quebrar a navegação */
+  }
+}

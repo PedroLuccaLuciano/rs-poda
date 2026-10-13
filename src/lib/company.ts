@@ -8,7 +8,8 @@ export const COMPANY = {
   /** Preencha quando os perfis oficiais estiverem disponíveis. */
   instagram: "",
   facebook: "",
-  email: "",
+  /** E-mail para orçamentos (empresas costumam cotar por e-mail). Preencha para ativar os botões. */
+  email: "contato@rspoda.com.br" as string,
 } as const;
 
 export const CIDADES = [

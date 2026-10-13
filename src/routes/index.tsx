@@ -11,6 +11,7 @@ import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { PhoneButton } from "@/components/PhoneButton";
+import { EmailButton } from "@/components/EmailButton";
 import { Gallery, type GalleryItem } from "@/components/Gallery";
 import {
   Carousel,
@@ -95,6 +96,7 @@ export const Route = createFileRoute("/")({
           url: "https://rspoda.com.br",
           image: `https://rspoda.com.br${equipe.url}`,
           telephone: "+5547999439286",
+          ...(COMPANY.email ? { email: COMPANY.email } : {}),
           taxID: COMPANY.cnpj,
           address: {
             "@type": "PostalAddress",
@@ -294,13 +296,16 @@ function Index() {
                 Poda de Árvores, Remoção de Árvores e Roçada em Joinville e Região
               </h1>
 
-              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
                 <WhatsAppButton location="hero" size="xl">
               Pedir orçamento no WhatsApp
             </WhatsAppButton>
                 <PhoneButton location="hero" variant="outlineLight" size="xl">
                   Ligar agora
                 </PhoneButton>
+                <EmailButton location="hero" variant="outlineLight" size="xl">
+                  Orçar por e-mail
+                </EmailButton>
               </div>
 
               <dl className="mt-8 grid gap-4 text-sm text-primary-foreground/90 sm:grid-cols-3 text-left">

@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { whatsappUrl } from "@/lib/whatsapp";
-import { trackWhatsAppClick } from "@/lib/analytics";
+import { trackEmailClick, trackWhatsAppClick } from "@/lib/analytics";
+import { EMAIL, EMAIL_SUBJECT, emailUrl } from "@/lib/email";
 
 const SERVICOS = [
   "Poda de árvore",
@@ -29,6 +30,20 @@ export function QuoteForm() {
     const w = window.open(url, "_blank");
     if (w) w.opener = null;
     else window.location.href = url;
+  }
+
+  function onEmail(e: React.MouseEvent<HTMLButtonElement>) {
+    const form = e.currentTarget.form;
+    if (!form || !form.reportValidity()) return;
+    const d = new FormData(form);
+    const body =
+      "Olá! Gostaria de solicitar um orçamento." +
+      `\n\nServiço: ${String(d.get("servico"))}` +
+      `\nLocal (cidade e bairro): ${String(d.get("local"))}` +
+      `\nPara quando: ${String(d.get("quando"))}` +
+      "\n\nSeguem fotos do local em anexo.";
+    trackEmailClick("formulario");
+    window.location.href = emailUrl(EMAIL_SUBJECT, body);
   }
 
   return (
@@ -69,9 +84,15 @@ export function QuoteForm() {
         <MessageCircle aria-hidden="true" className="size-5" />
         Enviar pelo WhatsApp
       </Button>
+      {EMAIL && (
+        <Button type="button" variant="outline" size="xl" className="mt-3 w-full" onClick={onEmail}>
+          <Mail aria-hidden="true" className="size-5" />
+          Enviar por e-mail
+        </Button>
+      )}
       <p className="mt-3 text-center text-xs text-muted-foreground">
-        O WhatsApp abre com os dados preenchidos. Depois, envie uma foto da árvore ou do terreno
-        para agilizar o orçamento.
+        O WhatsApp{EMAIL ? " ou o seu e-mail abrem" : " abre"} com os dados preenchidos. Depois, envie
+        uma foto da árvore ou do terreno para agilizar o orçamento.
       </p>
     </form>
   );

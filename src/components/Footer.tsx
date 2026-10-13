@@ -1,7 +1,9 @@
 import logo from "@/assets/logo-rs.png.asset.json";
 import { WhatsAppButton } from "./WhatsAppButton";
+import { EmailButton } from "./EmailButton";
 import { WHATSAPP_DISPLAY } from "@/lib/whatsapp";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackEmailClick, trackPhoneClick } from "@/lib/analytics";
+import { EMAIL } from "@/lib/email";
 import { COMPANY } from "@/lib/company";
 import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
@@ -9,11 +11,6 @@ export function Footer() {
   const social: { icon: typeof Instagram; label: string; href: string }[] = [
     { icon: Instagram, label: "Instagram", href: String(COMPANY.instagram) },
     { icon: Facebook, label: "Facebook", href: String(COMPANY.facebook) },
-    {
-      icon: Mail,
-      label: String(COMPANY.email),
-      href: COMPANY.email ? `mailto:${COMPANY.email}` : "",
-    },
   ].filter((s) => s.href !== "");
 
   return (
@@ -52,6 +49,18 @@ export function Footer() {
                 {WHATSAPP_DISPLAY}
               </a>
             </li>
+            {EMAIL && (
+              <li>
+                <a
+                  className="flex items-center gap-2 break-all transition-colors hover:text-accent"
+                  href={`mailto:${EMAIL}`}
+                  onClick={() => trackEmailClick("rodape")}
+                >
+                  <Mail aria-hidden="true" className="size-4 shrink-0 text-accent" />
+                  {EMAIL}
+                </a>
+              </li>
+            )}
             <li className="flex items-start gap-2">
               <Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />
               {COMPANY.hours} • Emergência: ligue
@@ -79,11 +88,14 @@ export function Footer() {
         <div>
           <h2 className="text-base font-bold">Peça seu orçamento</h2>
           <p className="mt-4 text-sm text-primary-foreground/85">
-            Resposta rápida pelo WhatsApp, sem compromisso.
+            Resposta rápida pelo WhatsApp{EMAIL ? " ou por e-mail" : ""}, sem compromisso.
           </p>
           <WhatsAppButton location="rodape" size="lg" className="mt-4 w-full sm:w-auto">
             Pedir orçamento no WhatsApp
           </WhatsAppButton>
+          <EmailButton location="rodape" size="lg" className="mt-3 w-full sm:w-auto">
+            Pedir orçamento por e-mail
+          </EmailButton>
         </div>
       </div>
 

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo-rs.png.asset.json";
-import { Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { PHONE_URL } from "@/lib/whatsapp";
-import { trackPhoneClick } from "@/lib/analytics";
+import { trackEmailClick, trackPhoneClick } from "@/lib/analytics";
+import { EMAIL, EMAIL_URL } from "@/lib/email";
 import { WhatsAppButton } from "./WhatsAppButton";
 
 const links = [
@@ -64,6 +65,16 @@ export function Header() {
           >
             <Phone aria-hidden="true" className="size-5" />
           </a>
+          {EMAIL && (
+            <a
+              href={EMAIL_URL}
+              onClick={() => trackEmailClick("header")}
+              aria-label="Pedir orçamento por e-mail"
+              className="hidden size-12 place-items-center rounded-md border-2 border-primary/30 text-primary transition-colors hover:bg-secondary sm:grid"
+            >
+              <Mail aria-hidden="true" className="size-5" />
+            </a>
+          )}
           <WhatsAppButton location="header" size="lg">
             <span className="hidden sm:inline">Pedir orçamento</span>
             <span className="sm:hidden">Orçamento</span>
