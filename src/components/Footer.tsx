@@ -1,11 +1,11 @@
 import logo from "@/assets/logo-rs.png.asset.json";
 import { WhatsAppButton } from "./WhatsAppButton";
 import { EmailButton } from "./EmailButton";
-import { WHATSAPP_DISPLAY } from "@/lib/whatsapp";
-import { trackEmailClick, trackPhoneClick } from "@/lib/analytics";
+import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/whatsapp";
+import { trackEmailClick, trackPhoneClick, trackWhatsAppClick } from "@/lib/analytics";
 import { EMAIL } from "@/lib/email";
 import { COMPANY } from "@/lib/company";
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 export function Footer() {
   const social: { icon: typeof Instagram; label: string; href: string }[] = [
@@ -42,11 +42,23 @@ export function Footer() {
             <li>
               <a
                 className="flex items-center gap-2 transition-colors hover:text-accent"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("rodape_contato")}
+              >
+                <MessageCircle aria-hidden="true" className="size-4 text-accent" />
+                WhatsApp: {WHATSAPP_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center gap-2 transition-colors hover:text-accent"
                 href={`tel:+55${WHATSAPP_DISPLAY.replace(/\D/g, "")}`}
                 onClick={() => trackPhoneClick("rodape")}
               >
                 <Phone aria-hidden="true" className="size-4 text-accent" />
-                {WHATSAPP_DISPLAY}
+                Telefone: {WHATSAPP_DISPLAY}
               </a>
             </li>
             {EMAIL && (
