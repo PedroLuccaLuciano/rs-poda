@@ -29,7 +29,8 @@ export function BeforeAfter({ items }: { items: BeforeAfterItem[] }) {
               <figure key={side.label} className="relative overflow-hidden rounded-xl">
                 <Picture
                   name={side.image}
-                  sizes="(min-width: 1024px) 270px, 50vw"
+                  variant="portrait"
+                  sizes="(min-width: 1024px) 260px, calc(50vw - 42px)"
                   alt={side.alt}
                   loading="lazy"
                   decoding="async"

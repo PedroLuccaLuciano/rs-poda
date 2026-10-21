@@ -26,7 +26,7 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { MENSAGENS, WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/whatsapp";
 import { COMPANY, CIDADES } from "@/lib/company";
 import equipe from "@/assets/equipe.jpeg.asset.json";
-import { Picture } from "@/components/Picture";
+import { Picture, imageSrcSet } from "@/components/Picture";
 import type { ImageName } from "@/lib/images.gen";
 import {
   Axe,
@@ -48,6 +48,8 @@ import {
   Users,
   Wrench,
 } from "lucide-react";
+
+const HERO_MOBILE_MEDIA = "(max-width: 639px)";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -80,6 +82,23 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://rspoda.com.br/" },
+      // Pré-carrega a foto do hero certa para cada tela (mesmos breakpoints do <picture>).
+      {
+        rel: "preload",
+        as: "image",
+        imageSrcSet: imageSrcSet("equipe", "hero-mobile"),
+        imageSizes: "100vw",
+        media: HERO_MOBILE_MEDIA,
+        fetchPriority: "high",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        imageSrcSet: imageSrcSet("equipe", "hero"),
+        imageSizes: "100vw",
+        media: "(min-width: 640px)",
+        fetchPriority: "high",
+      },
     ],
     scripts: [
       {
@@ -141,12 +160,12 @@ const provaSocial = [
 ];
 
 const clientes = [
-  { image: "essencis" as const, alt: "Essencis Catarinense" },
-  { image: "laureano" as const, alt: "Laureano" },
-  { image: "logo-arca" as const, alt: "Arca", tall: true },
-  { image: "navalsul" as const, alt: "Naval Sul", tall: true },
-  { image: "trg-logo" as const, alt: "TRG" },
-  { image: "farm-hill" as const, alt: "Farm Hill", tall: true },
+  { image: "essencis" as const, variant: "h80", alt: "Essencis Catarinense" },
+  { image: "laureano" as const, variant: "h104", alt: "Laureano" },
+  { image: "logo-arca" as const, variant: "h168", alt: "Arca", tall: true },
+  { image: "navalsul" as const, variant: "h168", alt: "Naval Sul", tall: true },
+  { image: "trg-logo" as const, variant: "h96", alt: "TRG" },
+  { image: "farm-hill" as const, variant: "h168", alt: "Farm Hill", tall: true },
 ];
 
 const numeros = [
@@ -269,14 +288,22 @@ function Index() {
       <main>
         {/* HERO */}
         <section className="relative isolate flex min-h-[80svh] items-center overflow-hidden pt-20">
-          <Picture
-            name="equipe"
-            sizes="100vw"
-            alt="Equipe da RS Poda com caminhão munck ao lado de árvores em Joinville"
-            fetchPriority="high"
-            decoding="async"
-            className="absolute inset-0 -z-20 size-full scale-105 object-cover object-[center_65%]"
-          />
+          <picture>
+            <source
+              media={HERO_MOBILE_MEDIA}
+              srcSet={imageSrcSet("equipe", "hero-mobile")}
+              sizes="100vw"
+            />
+            <Picture
+              name="equipe"
+              variant="hero"
+              sizes="100vw"
+              alt="Equipe da RS Poda com caminhão munck ao lado de árvores em Joinville"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 -z-20 size-full scale-105 object-cover object-[center_65%]"
+            />
+          </picture>
           <div className="absolute inset-0 -z-10 bg-primary/70" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/90 via-primary/55 to-transparent" />
             
@@ -372,6 +399,7 @@ function Index() {
                     <div className="flex h-28 items-center justify-center px-4">
                       <Picture
                         name={c.image}
+                        variant={c.variant}
                         alt={c.alt}
                         loading="lazy"
                         decoding="async"
@@ -405,7 +433,8 @@ function Index() {
                 <div className="relative h-40 overflow-hidden">
                   <Picture
                     name={s.image}
-                    sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, 100vw"
+                    variant="card"
+                    sizes="(min-width: 1024px) 270px, (min-width: 640px) calc(50vw - 26px), calc(100vw - 32px)"
                     alt=""
                     aria-hidden="true"
                     loading="lazy"
@@ -534,6 +563,7 @@ function Index() {
         <section className="relative isolate overflow-hidden bg-primary py-24">
           <Picture
             name="poda-escalada"
+            variant="bg"
             alt=""
             aria-hidden="true"
             loading="lazy"
