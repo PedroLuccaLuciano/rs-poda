@@ -14,7 +14,7 @@ export default function GalleryLightbox({
       <DialogContent className="max-w-3xl overflow-hidden p-0">
         <DialogTitle className="sr-only">{item.alt}</DialogTitle>
         <img
-          src={imageUrl(item.image)}
+          src={imageUrl(item.image, "full")}
           alt={item.alt}
           className="max-h-[80svh] w-full object-contain bg-primary"
         />

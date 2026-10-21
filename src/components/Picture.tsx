@@ -1,28 +1,39 @@
 import type { ImgHTMLAttributes } from "react";
-import { IMAGES, type ImageName } from "@/lib/images.gen";
+import { IMAGES, type ImageName, type ImageVariant } from "@/lib/images.gen";
 
 // Imagens otimizadas geradas por scripts/optimize-images.py em /images/opt.
-export function imageUrl(name: ImageName, width?: number) {
-  const { widths } = IMAGES[name];
-  const w = width ?? widths[widths.length - 1];
-  return `/images/opt/${name}-${w}.webp`;
+// `variant` é o recorte gerado para cada uso (ex.: "card", "square", "hero").
+function getVariant(name: ImageName, variant: string): ImageVariant {
+  const v = (IMAGES[name] as Record<string, ImageVariant>)[variant];
+  if (!v) throw new Error(`Imagem ${name} sem variante "${variant}"`);
+  return v;
 }
 
-export function imageSrcSet(name: ImageName) {
-  return IMAGES[name].widths.map((w) => `${imageUrl(name, w)} ${w}w`).join(", ");
+export function imageUrl(name: ImageName, variant: string, width?: number) {
+  const v = getVariant(name, variant);
+  if (v.file) return `/images/opt/${v.file}`;
+  return `/images/opt/${name}-${variant}-${width ?? v.widths[v.widths.length - 1]}.webp`;
+}
+
+export function imageSrcSet(name: ImageName, variant: string) {
+  return getVariant(name, variant)
+    .widths.map((w) => `${imageUrl(name, variant, w)} ${w}w`)
+    .join(", ");
 }
 
 type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet" | "width" | "height"> & {
   name: ImageName;
+  variant: string;
 };
 
-export function Picture({ name, sizes = "100vw", ...rest }: Props) {
-  const { width, height, widths } = IMAGES[name];
+export function Picture({ name, variant, sizes = "100vw", ...rest }: Props) {
+  const { width, height, widths } = getVariant(name, variant);
+  const multi = widths.length > 1;
   return (
     <img
-      src={imageUrl(name)}
-      srcSet={widths.length > 1 ? imageSrcSet(name) : undefined}
-      sizes={widths.length > 1 ? sizes : undefined}
+      src={imageUrl(name, variant)}
+      srcSet={multi ? imageSrcSet(name, variant) : undefined}
+      sizes={multi ? sizes : undefined}
       width={width}
       height={height}
       {...rest}

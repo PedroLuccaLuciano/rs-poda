@@ -31,7 +31,8 @@ export function Gallery({ items }: Props) {
             >
               <Picture
                 name={g.image}
-                sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
+                variant="square"
+                sizes="(min-width: 1024px) 370px, (min-width: 640px) calc(50vw - 26px), calc(100vw - 32px)"
                 alt={g.alt}
                 loading="lazy"
                 decoding="async"
