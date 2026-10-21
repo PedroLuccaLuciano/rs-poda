@@ -1,6 +1,6 @@
 ---
 name: otimizar-imagens
-description: Adiciona, troca ou remove fotos e logos do site da RS Poda sem perder desempenho no PageSpeed — gera as versões WebP otimizadas com scripts/optimize-images.py e liga a imagem no código com o componente <Picture>. Use sempre que o pedido envolver imagem no site, mesmo sem citar o script: "coloca essa foto na galeria", "troca a foto do hero", "novo cliente, adiciona o logo", "tira a foto X", "atualiza a foto do serviço de roçada", "a imagem está pesada/lenta", ou qualquer arquivo novo em public/images.
+description: 'Adiciona, troca ou remove fotos e logos do site da RS Poda sem perder desempenho no PageSpeed — gera as versões WebP otimizadas com scripts/optimize-images.py e liga a imagem no código com o componente Picture. Use sempre que o pedido envolver imagem no site, mesmo sem citar o script: "coloca essa foto na galeria", "troca a foto do hero", "novo cliente, adiciona o logo", "tira a foto X", "atualiza a foto do serviço de roçada", "a imagem está pesada/lenta", ou qualquer arquivo novo em public/images.'
 ---
 
 # Otimizar imagens (RS Poda)
