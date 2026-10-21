@@ -1,6 +1,14 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource/archivo/latin-600.css";
+@import "@fontsource/archivo/latin-700.css";
+@import "@fontsource/archivo/latin-800.css";
+@import "@fontsource/archivo/latin-900.css";
+@import "@fontsource/barlow/latin-400.css";
+@import "@fontsource/barlow/latin-500.css";
+@import "@fontsource/barlow/latin-600.css";
+@import "@fontsource/barlow/latin-700.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -96,7 +104,8 @@
   --border: oklch(0.912 0.014 255);
   --input: oklch(0.912 0.014 255);
   --ring: oklch(0.78 0.15 85);
-  --whatsapp: oklch(0.68 0.17 152);
+  /* Verde escuro o bastante para texto branco passar no contraste AA (4.5:1). */
+  --whatsapp: oklch(0.527 0.154 150.069);
   --whatsapp-foreground: oklch(1 0 0);
 
   --gradient-hero: linear-gradient(

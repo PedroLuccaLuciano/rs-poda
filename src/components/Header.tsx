@@ -33,7 +33,7 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:h-20">
         <a href="#topo" className="flex items-center gap-3" aria-label="RS Poda — início">
           <img
-            src="/images/icone3.png"
+            src="/images/opt/icone3-160.webp"
             alt="Logotipo RS Poda"
             width={48}
             height={48}

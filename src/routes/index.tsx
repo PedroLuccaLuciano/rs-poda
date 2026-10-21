@@ -20,16 +20,14 @@ import {
   CarouselNext,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { BeforeAfter } from "@/components/BeforeAfter";
+import { BeforeAfter, type BeforeAfterItem } from "@/components/BeforeAfter";
 import { initAnalytics, trackWhatsAppClick } from "@/lib/analytics";
 import { QuoteForm } from "@/components/QuoteForm";
 import { MENSAGENS, WHATSAPP_DISPLAY, whatsappUrl } from "@/lib/whatsapp";
 import { COMPANY, CIDADES } from "@/lib/company";
-import podaAltura from "@/assets/poda-altura.jpeg.asset.json";
 import equipe from "@/assets/equipe.jpeg.asset.json";
-import podaEscalada from "@/assets/poda-escalada.jpg.asset.json";
-import rocada from "@/assets/rocada.jpg.asset.json";
-import limpeza from "@/assets/limpeza.jpg.asset.json";
+import { Picture } from "@/components/Picture";
+import type { ImageName } from "@/lib/images.gen";
 import {
   Axe,
   BadgeCheck,
@@ -82,7 +80,6 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://rspoda.com.br/" },
-      { rel: "preload", as: "image", href: equipe.url, fetchPriority: "high" },
     ],
     scripts: [
       {
@@ -128,11 +125,11 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const servicos = [
-  { key: "poda", icon: TreeDeciduous, image: "/images/munck5.jpeg", title: "Poda de árvores em Joinville", text: "Poda técnica em qualquer altura com cesto aéreo e caminhão munck, inclusive próximo à rede elétrica.", msg: MENSAGENS.poda },
-  { key: "remocao", icon: Axe, image: "/images/derrubada.jpeg", title: "Remoção de árvores", text: "Derrubada segura de árvores de pequeno a grande porte, com equipe treinada, EPIs e, quando necessário, munck e cesto aéreo.", msg: MENSAGENS.remocao },
-  { key: "rocada", icon: Leaf, image: "/images/rocada1.png", title: "Roçada de terrenos", text: "Roçada em Joinville e Araquari: lotes, chácaras, condomínios e áreas industriais.", msg: MENSAGENS.rocada },
-  { key: "limpeza", icon: Recycle, image: podaEscalada.url, title: "Limpeza e retirada de resíduos", text: "Recolhimento de galhos, troncos e entulho vegetal, com a área entregue varrida e organizada.", msg: MENSAGENS.limpeza },
+const servicos: { key: string; icon: typeof Leaf; image: ImageName; title: string; text: string; msg: string }[] = [
+  { key: "poda", icon: TreeDeciduous, image: "munck5", title: "Poda de árvores em Joinville", text: "Poda técnica em qualquer altura com cesto aéreo e caminhão munck, inclusive próximo à rede elétrica.", msg: MENSAGENS.poda },
+  { key: "remocao", icon: Axe, image: "derrubada", title: "Remoção de árvores", text: "Derrubada segura de árvores de pequeno a grande porte, com equipe treinada, EPIs e, quando necessário, munck e cesto aéreo.", msg: MENSAGENS.remocao },
+  { key: "rocada", icon: Leaf, image: "rocada1", title: "Roçada de terrenos", text: "Roçada em Joinville e Araquari: lotes, chácaras, condomínios e áreas industriais.", msg: MENSAGENS.rocada },
+  { key: "limpeza", icon: Recycle, image: "poda-escalada", title: "Limpeza e retirada de resíduos", text: "Recolhimento de galhos, troncos e entulho vegetal, com a área entregue varrida e organizada.", msg: MENSAGENS.limpeza },
 ];
 const provaSocial = [
   { icon: BadgeCheck, title: "Empresa registrada", text: `CNPJ ${COMPANY.cnpj}` },
@@ -144,12 +141,12 @@ const provaSocial = [
 ];
 
 const clientes = [
-  { src: "/images/essencis.png", alt: "Essencis Catarinense" },
-  { src: "/images/laureano.png", alt: "Laureano" },
-  { src: "/images/logo-arca.png", alt: "Arca", tall: true },
-  { src: "/images/navalsul.png", alt: "Naval Sul", tall: true },
-  { src: "/images/trg-logo.png", alt: "TRG" },
-  { src: "/images/farm-hill.png", alt: "Farm Hill", tall: true },
+  { image: "essencis" as const, alt: "Essencis Catarinense" },
+  { image: "laureano" as const, alt: "Laureano" },
+  { image: "logo-arca" as const, alt: "Arca", tall: true },
+  { image: "navalsul" as const, alt: "Naval Sul", tall: true },
+  { image: "trg-logo" as const, alt: "TRG" },
+  { image: "farm-hill" as const, alt: "Farm Hill", tall: true },
 ];
 
 const numeros = [
@@ -191,26 +188,26 @@ const seguranca = [
 ];
 
 const galeria: GalleryItem[] = [
-  { src: "/images/munck1.jpeg", alt: "Poda de palmeira com caminhão munck e braço articulado", category: "Poda com munck" },
-  { src: "/images/munck2.jpeg", alt: "Poda de pinheiro com braço do munck ao lado de muro", category: "Poda com munck" },
-  { src: "/images/munck3.jpeg", alt: "Poda de palmeiras com cesto aéreo em via urbana", category: "Poda com cesto aéreo" },
-  { src: "/images/munck6.jpeg", alt: "Poda de pinheiro próximo à rede elétrica com garra do munck", category: "Poda com munck" },
-  { src: "/images/derrubada.jpeg", alt: "Remoção de árvores por equipe com EPIs em área pública", category: "Remoção" },
-  { src: "/images/rocada1.png", alt: "Roçada de gramado com roçadeira costal e EPIs", category: "Roçada" },
+  { image: "munck1", alt: "Poda de palmeira com caminhão munck e braço articulado", category: "Poda com munck" },
+  { image: "munck2", alt: "Poda de pinheiro com braço do munck ao lado de muro", category: "Poda com munck" },
+  { image: "munck3", alt: "Poda de palmeiras com cesto aéreo em via urbana", category: "Poda com cesto aéreo" },
+  { image: "munck6", alt: "Poda de pinheiro próximo à rede elétrica com garra do munck", category: "Poda com munck" },
+  { image: "derrubada", alt: "Remoção de árvores por equipe com EPIs em área pública", category: "Remoção" },
+  { image: "rocada1", alt: "Roçada de gramado com roçadeira costal e EPIs", category: "Roçada" },
 ];
 
-const antesDepois = [
+const antesDepois: BeforeAfterItem[] = [
   {
     title: "Árvore sobre a rede elétrica → poda finalizada",
-    before: rocada.url,
-    after: limpeza.url,
+    before: "rocada",
+    after: "limpeza",
     beforeAlt: "Pinheiro alto encostando na rede elétrica, com caminhão munck posicionado",
     afterAlt: "Árvore após a poda, com o munck ao lado",
   },
   {
     title: "Terreno com mato alto → área roçada",
-    before: podaAltura.url,
-    after: podaEscalada.url,
+    before: "poda-altura",
+    after: "poda-escalada",
     beforeAlt: "Terreno com vegetação densa e caminhão munck antes da limpeza",
     afterAlt: "Terreno limpo após a remoção da vegetação",
   },
@@ -272,11 +269,10 @@ function Index() {
       <main>
         {/* HERO */}
         <section className="relative isolate flex min-h-[80svh] items-center overflow-hidden pt-20">
-          <img
-            src={equipe.url}
+          <Picture
+            name="equipe"
+            sizes="100vw"
             alt="Equipe da RS Poda com caminhão munck ao lado de árvores em Joinville"
-            width={1200}
-            height={1600}
             fetchPriority="high"
             decoding="async"
             className="absolute inset-0 -z-20 size-full scale-105 object-cover object-[center_65%]"
@@ -309,26 +305,26 @@ function Index() {
               </div>
 
               <dl className="mt-8 grid gap-4 text-sm text-primary-foreground/90 sm:grid-cols-3 text-left">
-                <div className="flex items-start gap-2">
-                  <Phone aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-accent" />
-                  <div>
-                    <dt className="font-semibold">WhatsApp</dt>
-                    <dd>{WHATSAPP_DISPLAY}</dd>
-                  </div>
+                <div className="relative pl-7">
+                  <dt className="font-semibold">
+                    <Phone aria-hidden="true" className="absolute left-0 top-0.5 size-5 text-accent" />
+                    WhatsApp
+                  </dt>
+                  <dd>{WHATSAPP_DISPLAY}</dd>
                 </div>
-                <div className="flex items-start gap-2">
-                  <Clock aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-accent" />
-                  <div>
-                    <dt className="font-semibold">Atendimento</dt>
-                    <dd>{COMPANY.hours}</dd>
-                  </div>
+                <div className="relative pl-7">
+                  <dt className="font-semibold">
+                    <Clock aria-hidden="true" className="absolute left-0 top-0.5 size-5 text-accent" />
+                    Atendimento
+                  </dt>
+                  <dd>{COMPANY.hours}</dd>
                 </div>
-                <div className="flex items-start gap-2">
-                  <Siren aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-accent" />
-                  <div>
-                    <dt className="font-semibold">Emergência</dt>
-                    <dd>{COMPANY.emergencia}</dd>
-                  </div>
+                <div className="relative pl-7">
+                  <dt className="font-semibold">
+                    <Siren aria-hidden="true" className="absolute left-0 top-0.5 size-5 text-accent" />
+                    Emergência
+                  </dt>
+                  <dd>{COMPANY.emergencia}</dd>
                 </div>
               </dl>
             </div>
@@ -374,8 +370,8 @@ function Index() {
                     className="basis-1/2 sm:basis-1/3 lg:basis-1/5"
                   >
                     <div className="flex h-28 items-center justify-center px-4">
-                      <img
-                        src={c.src}
+                      <Picture
+                        name={c.image}
                         alt={c.alt}
                         loading="lazy"
                         decoding="async"
@@ -407,12 +403,11 @@ function Index() {
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
               >
                 <div className="relative h-40 overflow-hidden">
-                  <img
-                    src={s.image}
+                  <Picture
+                    name={s.image}
+                    sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, 100vw"
                     alt=""
                     aria-hidden="true"
-                    width={800}
-                    height={600}
                     loading="lazy"
                     decoding="async"
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -537,8 +532,8 @@ function Index() {
 
         {/* CHAMADA FINAL */}
         <section className="relative isolate overflow-hidden bg-primary py-24">
-          <img
-            src={podaEscalada.url}
+          <Picture
+            name="poda-escalada"
             alt=""
             aria-hidden="true"
             loading="lazy"

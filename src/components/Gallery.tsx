@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { lazy, Suspense, useState } from "react";
+import { Picture } from "@/components/Picture";
+import type { ImageName } from "@/lib/images.gen";
+
+// O lightbox só é necessário ao clicar numa foto; carrega o Dialog sob demanda.
+const GalleryLightbox = lazy(() => import("./GalleryLightbox"));
 
 export type GalleryItem = {
-  src: string;
+  image: ImageName;
   alt: string;
   category: string;
 };
@@ -18,18 +22,17 @@ export function Gallery({ items }: Props) {
     <div>
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((g) => (
-          <li key={g.src + g.category}>
+          <li key={g.image + g.category}>
             <button
               type="button"
               onClick={() => setOpen(g)}
               className="group relative block w-full overflow-hidden rounded-xl shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               aria-label={`Ampliar foto: ${g.alt}`}
             >
-              <img
-                src={g.src}
+              <Picture
+                name={g.image}
+                sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
                 alt={g.alt}
-                width={900}
-                height={1200}
                 loading="lazy"
                 decoding="async"
                 className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-80"
@@ -42,18 +45,11 @@ export function Gallery({ items }: Props) {
         ))}
       </ul>
 
-      <Dialog open={open !== null} onOpenChange={(o) => !o && setOpen(null)}>
-        <DialogContent className="max-w-3xl overflow-hidden p-0">
-          <DialogTitle className="sr-only">{open?.alt ?? "Foto"}</DialogTitle>
-          {open ? (
-            <img
-              src={open.src}
-              alt={open.alt}
-              className="max-h-[80svh] w-full object-contain bg-primary"
-            />
-          ) : null}
-        </DialogContent>
-      </Dialog>
+      {open ? (
+        <Suspense fallback={null}>
+          <GalleryLightbox item={open} onClose={() => setOpen(null)} />
+        </Suspense>
+      ) : null}
     </div>
   );
 }
