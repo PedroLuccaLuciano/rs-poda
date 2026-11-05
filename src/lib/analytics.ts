@@ -1,5 +1,5 @@
 /**
- * Camada de analytics preparada para GA4, Google Tag Manager e Meta Pixel.
+ * Camada de analytics preparada para Google Ads, GA4, Google Tag Manager e Meta Pixel.
  *
  * Basta preencher os IDs abaixo (ou as variáveis de ambiente VITE_*) para
  * ativar as integrações. Enquanto vazios, nada é carregado e nenhum erro ocorre.
@@ -7,9 +7,15 @@
 
 const env = import.meta.env as Record<string, string | undefined>;
 
-export const GA4_ID = env["VITE_GA4_ID"] ?? "";
+export const GA4_ID = env["VITE_GA4_ID"] ?? "G-HNGKWJX11W";
 export const GTM_ID = env["VITE_GTM_ID"] ?? "";
 export const META_PIXEL_ID = env["VITE_META_PIXEL_ID"] ?? "";
+
+/** Google Ads (conta RS Caçambas, que roda as campanhas dos 3 sites). */
+export const GOOGLE_ADS_ID = env["VITE_GOOGLE_ADS_ID"] ?? "AW-18487700699";
+/** Rótulo da conversão exclusiva deste site no Google Ads. */
+export const GOOGLE_ADS_CONVERSION_LABEL =
+  env["VITE_GOOGLE_ADS_CONVERSION_LABEL"] ?? "RPeFCMywsrIdENvZz-9E";
 
 declare global {
   interface Window {
@@ -39,13 +45,16 @@ export function initAnalytics() {
     loadScript(`https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`);
   }
 
-  if (GA4_ID) {
-    loadScript(`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`);
-    window.gtag = function gtag(...args: unknown[]) {
-      window.dataLayer!.push(args);
+  const gtagIds = [GOOGLE_ADS_ID, GA4_ID].filter(Boolean);
+  if (gtagIds.length) {
+    loadScript(`https://www.googletagmanager.com/gtag/js?id=${gtagIds[0]}`);
+    // O gtag.js exige o objeto `arguments` (um array comum é ignorado).
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params
+      window.dataLayer!.push(arguments);
     };
     window.gtag("js", new Date());
-    window.gtag("config", GA4_ID);
+    for (const id of gtagIds) window.gtag("config", id);
   }
 
   if (META_PIXEL_ID) {
@@ -72,6 +81,14 @@ export function initAnalytics() {
   }
 }
 
+/** Conversão do Google Ads (conta uma por clique no anúncio, configurado no Ads). */
+function reportAdsConversion() {
+  if (!GOOGLE_ADS_ID || !GOOGLE_ADS_CONVERSION_LABEL) return;
+  window.gtag?.("event", "conversion", {
+    send_to: `${GOOGLE_ADS_ID}/${GOOGLE_ADS_CONVERSION_LABEL}`,
+  });
+}
+
 /** Evento único de conversão para TODOS os cliques em botões de WhatsApp. */
 export function trackWhatsAppClick(location: string) {
   const payload = { event: "whatsapp_click", location, channel: "whatsapp" };
@@ -82,6 +99,7 @@ export function trackWhatsAppClick(location: string) {
       event_label: location,
     });
     window.fbq?.("track", "Contact", { content_name: location, channel: "whatsapp" });
+    reportAdsConversion();
   } catch {
     /* analytics nunca deve quebrar a navegação */
   }
@@ -97,6 +115,7 @@ export function trackPhoneClick(location: string) {
       event_label: location,
     });
     window.fbq?.("track", "Contact", { content_name: location, channel: "phone" });
+    reportAdsConversion();
   } catch {
     /* analytics nunca deve quebrar a navegação */
   }
