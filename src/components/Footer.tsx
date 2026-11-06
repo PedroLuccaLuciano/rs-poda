@@ -4,7 +4,7 @@ import { EmailButton } from "./EmailButton";
 import { WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/whatsapp";
 import { trackEmailClick, trackPhoneClick, trackWhatsAppClick } from "@/lib/analytics";
 import { EMAIL } from "@/lib/email";
-import { COMPANY } from "@/lib/company";
+import { COMPANY, CIDADES } from "@/lib/company";
 import { Clock, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 export function Footer() {
@@ -109,6 +109,14 @@ export function Footer() {
             Pedir orçamento por e-mail
           </EmailButton>
         </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl border-t border-primary-foreground/15 px-4 py-6 text-sm text-primary-foreground/85">
+        <h2 className="text-base font-bold text-primary-foreground">Cidades atendidas</h2>
+        <p className="mt-2">
+          {CIDADES.join(", ")}. Atendemos também as demais cidades de Santa Catarina, sob orçamento,
+          com visita ao local.
+        </p>
       </div>
 
       <div className="border-t border-primary-foreground/15 py-5 text-center text-xs text-primary-foreground/70">

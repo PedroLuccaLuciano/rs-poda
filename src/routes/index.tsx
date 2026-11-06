@@ -122,7 +122,10 @@ export const Route = createFileRoute("/")({
             postalCode: "89209-275",
             addressCountry: "BR",
           },
-          areaServed: CIDADES.map((c) => ({ "@type": "City", name: c })),
+          areaServed: [
+            ...CIDADES.map((c) => ({ "@type": "City", name: c })),
+            { "@type": "State", name: "Santa Catarina" },
+          ],
           openingHours: "Mo-Sa 07:00-21:00",
           geo: {
             "@type": "GeoCoordinates",
@@ -517,7 +520,7 @@ function Index() {
               Onde atendemos
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Joinville, Araquari, São Francisco do Sul e região. Outras cidades sob orçamento, com visita ao local.
+              Joinville, Araquari, São Francisco do Sul e região. Demais cidades de Santa Catarina sob orçamento, com visita ao local.
             </p>
           </header>
 
