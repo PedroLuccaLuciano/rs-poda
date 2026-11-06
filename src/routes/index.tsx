@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Empresa de poda de árvores em Joinville e Araquari: poda em altura, remoção de árvores e roçada de terrenos. Equipe com EPIs e motosserras STIHL. Orçamento gratuito no WhatsApp.",
+          "Poda de árvores em Joinville e Araquari: poda em altura, remoção de árvores e roçada de terrenos. Equipe com EPIs. Orçamento gratuito no WhatsApp.",
       },
       {
         property: "og:title",
@@ -123,7 +123,7 @@ export const Route = createFileRoute("/")({
             addressCountry: "BR",
           },
           areaServed: CIDADES.map((c) => ({ "@type": "City", name: c })),
-          openingHours: "Mo-Su 00:00-23:59",
+          openingHours: "Mo-Sa 07:00-21:00",
           geo: {
             "@type": "GeoCoordinates",
             latitude: -26.357807854289053,
