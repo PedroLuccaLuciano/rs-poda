@@ -113,6 +113,10 @@ export function Footer() {
 
       <div className="border-t border-primary-foreground/15 py-5 text-center text-xs text-primary-foreground/70">
         © {new Date().getFullYear()} {COMPANY.name}. Todos os direitos reservados.
+        {" · "}
+        <a href="/privacidade" className="underline hover:text-accent">
+          Política de Privacidade
+        </a>
       </div>
     </footer>
   );
