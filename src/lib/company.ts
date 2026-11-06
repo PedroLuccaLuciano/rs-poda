@@ -20,6 +20,7 @@ export const CIDADES = [
   "Guaramirim",
   "Jaraguá do Sul",
   "Schroeder",
+  "Barra Velha",
   "Balneário Piçarras",
   "Penha",
   "Navegantes",
