@@ -108,7 +108,7 @@ export const Route = createFileRoute("/")({
           "@type": "LocalBusiness",
           name: "RS Poda",
           description:
-            "Poda de árvores, remoção de árvores, roçada e serviços ambientais em Joinville, Araquari e região norte de Santa Catarina.",
+            "Poda de árvores, remoção de árvores, roçada e serviços ambientais em Joinville, Araquari, São Francisco do Sul e região. Outras cidades de Santa Catarina sob orçamento.",
           url: "https://rspoda.com.br",
           image: `https://rspoda.com.br${equipe.url}`,
           telephone: "+5547999439286",
@@ -169,7 +169,7 @@ const clientes = [
 ];
 
 const numeros = [
-  { icon: MapPin, value: "Joinville", label: "e região norte de SC" },
+  { icon: MapPin, value: "Joinville", label: "e região" },
   { icon: TreeDeciduous, value: "Poda, remoção e roçada", label: "serviços executados" },
   { icon: Truck, value: "Munck próprio", label: "caminhão da própria equipe" },
 ];
@@ -514,10 +514,10 @@ function Index() {
               Área de atendimento
             </p>
             <h2 className="mt-2 text-3xl font-extrabold text-primary sm:text-4xl">
-              Atendemos toda a região Norte de Santa Catarina
+              Onde atendemos
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Atendimento em cidades em um raio aproximado de 40 km.
+              Joinville, Araquari, São Francisco do Sul e região. Outras cidades sob orçamento, com visita ao local.
             </p>
           </header>
 

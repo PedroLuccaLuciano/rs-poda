@@ -20,4 +20,6 @@ export const CIDADES = [
   "Guaramirim",
   "Jaraguá do Sul",
   "Schroeder",
+  "Itajaí",
+  "Balneário Camboriú",
 ] as const;
