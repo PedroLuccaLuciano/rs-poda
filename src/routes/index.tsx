@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import {
   Accordion,
@@ -147,11 +147,11 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const servicos: { key: string; icon: typeof Leaf; image: ImageName; title: string; text: string; msg: string }[] = [
-  { key: "poda", icon: TreeDeciduous, image: "munck5", title: "Poda de árvores em Joinville", text: "Poda técnica em qualquer altura com cesto aéreo e caminhão munck, inclusive próximo à rede elétrica.", msg: MENSAGENS.poda },
-  { key: "remocao", icon: Axe, image: "derrubada", title: "Remoção de árvores", text: "Derrubada segura de árvores de pequeno a grande porte, com equipe treinada, EPIs e, quando necessário, munck e cesto aéreo.", msg: MENSAGENS.remocao },
-  { key: "rocada", icon: Leaf, image: "rocada1", title: "Roçada de terrenos", text: "Roçada em Joinville e Araquari: lotes, chácaras, condomínios e áreas industriais.", msg: MENSAGENS.rocada },
-  { key: "limpeza", icon: Recycle, image: "poda-escalada", title: "Limpeza e retirada de resíduos", text: "Recolhimento de galhos, troncos e entulho vegetal, com a área entregue varrida e organizada.", msg: MENSAGENS.limpeza },
+const servicos: { key: string; icon: typeof Leaf; image: ImageName; title: string; text: string; msg: string; page: string }[] = [
+  { key: "poda", icon: TreeDeciduous, image: "munck5", title: "Poda de árvores em Joinville", text: "Poda técnica em qualquer altura com cesto aéreo e caminhão munck, inclusive próximo à rede elétrica.", msg: MENSAGENS.poda, page: "/poda-de-arvores" },
+  { key: "remocao", icon: Axe, image: "derrubada", title: "Remoção de árvores", text: "Derrubada segura de árvores de pequeno a grande porte, com equipe treinada, EPIs e, quando necessário, munck e cesto aéreo.", msg: MENSAGENS.remocao, page: "/remocao-de-arvores" },
+  { key: "rocada", icon: Leaf, image: "rocada1", title: "Roçada de terrenos", text: "Roçada em Joinville e Araquari: lotes, chácaras, condomínios e áreas industriais.", msg: MENSAGENS.rocada, page: "/rocada-e-limpeza-de-terreno" },
+  { key: "limpeza", icon: Recycle, image: "poda-escalada", title: "Limpeza e retirada de resíduos", text: "Recolhimento de galhos, troncos e entulho vegetal, com a área entregue varrida e organizada.", msg: MENSAGENS.limpeza, page: "/rocada-e-limpeza-de-terreno" },
 ];
 const provaSocial = [
   { icon: BadgeCheck, title: "Empresa registrada", text: `CNPJ ${COMPANY.cnpj}` },
@@ -451,19 +451,41 @@ function Index() {
                 <div className="flex flex-1 flex-col p-6">
                   <h3 className="text-lg font-bold text-primary">{s.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
-                  <a
-                    href={whatsappUrl(s.msg)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackWhatsAppClick(`servico_${s.key}`)}
-                    className="mt-auto self-start pt-4 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-                  >
-                    Pedir orçamento →
-                  </a>
+                  {/* Ações sempre no pé do card, na mesma altura em todos. */}
+                  <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-4">
+                    <a
+                      href={whatsappUrl(s.msg)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackWhatsAppClick(`servico_${s.key}`)}
+                      className="text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                    >
+                      Pedir orçamento →
+                    </a>
+                    <Link to={s.page} className="text-sm font-semibold text-accent-strong underline-offset-4 hover:underline">
+                      Ver detalhes
+                    </Link>
+                  </div>
                 </div>
               </li>
             ))}
           </ul>
+
+          <p className="mt-8 text-center text-muted-foreground">
+            Também fazemos{" "}
+            <Link to="/poda-e-remocao-de-palmeiras" className="font-semibold text-primary underline">
+              poda e remoção de palmeiras
+            </Link>{" "}
+            e ajudamos a pedir a{" "}
+            <Link to="/autorizacao-para-corte-de-arvore" className="font-semibold text-primary underline">
+              autorização para corte na SAMA
+            </Link>
+            . Veja a{" "}
+            <Link to="/regiao-atendida" className="font-semibold text-primary underline">
+              região atendida
+            </Link>
+            .
+          </p>
 
           <div className="mt-10 flex justify-center">
             <WhatsAppButton location="apos_servicos" size="xl">

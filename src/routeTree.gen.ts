@@ -10,11 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AutorizacaoParaCorteDeArvoreRouteImport } from './routes/autorizacao-para-corte-de-arvore'
+import { Route as PodaDeArvoresRouteImport } from './routes/poda-de-arvores'
+import { Route as PodaERemocaoDePalmeirasRouteImport } from './routes/poda-e-remocao-de-palmeiras'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as RegiaoAtendidaRouteImport } from './routes/regiao-atendida'
+import { Route as RemocaoDeArvoresRouteImport } from './routes/remocao-de-arvores'
+import { Route as RocadaELimpezaDeTerrenoRouteImport } from './routes/rocada-e-limpeza-de-terreno'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AutorizacaoParaCorteDeArvoreRoute =
+  AutorizacaoParaCorteDeArvoreRouteImport.update({
+    id: '/autorizacao-para-corte-de-arvore',
+    path: '/autorizacao-para-corte-de-arvore',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PodaDeArvoresRoute = PodaDeArvoresRouteImport.update({
+  id: '/poda-de-arvores',
+  path: '/poda-de-arvores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PodaERemocaoDePalmeirasRoute = PodaERemocaoDePalmeirasRouteImport.update({
+  id: '/poda-e-remocao-de-palmeiras',
+  path: '/poda-e-remocao-de-palmeiras',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
@@ -22,31 +44,95 @@ const PrivacidadeRoute = PrivacidadeRouteImport.update({
   path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegiaoAtendidaRoute = RegiaoAtendidaRouteImport.update({
+  id: '/regiao-atendida',
+  path: '/regiao-atendida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RemocaoDeArvoresRoute = RemocaoDeArvoresRouteImport.update({
+  id: '/remocao-de-arvores',
+  path: '/remocao-de-arvores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RocadaELimpezaDeTerrenoRoute = RocadaELimpezaDeTerrenoRouteImport.update({
+  id: '/rocada-e-limpeza-de-terreno',
+  path: '/rocada-e-limpeza-de-terreno',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/autorizacao-para-corte-de-arvore': typeof AutorizacaoParaCorteDeArvoreRoute
+  '/poda-de-arvores': typeof PodaDeArvoresRoute
+  '/poda-e-remocao-de-palmeiras': typeof PodaERemocaoDePalmeirasRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/regiao-atendida': typeof RegiaoAtendidaRoute
+  '/remocao-de-arvores': typeof RemocaoDeArvoresRoute
+  '/rocada-e-limpeza-de-terreno': typeof RocadaELimpezaDeTerrenoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/autorizacao-para-corte-de-arvore': typeof AutorizacaoParaCorteDeArvoreRoute
+  '/poda-de-arvores': typeof PodaDeArvoresRoute
+  '/poda-e-remocao-de-palmeiras': typeof PodaERemocaoDePalmeirasRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/regiao-atendida': typeof RegiaoAtendidaRoute
+  '/remocao-de-arvores': typeof RemocaoDeArvoresRoute
+  '/rocada-e-limpeza-de-terreno': typeof RocadaELimpezaDeTerrenoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/autorizacao-para-corte-de-arvore': typeof AutorizacaoParaCorteDeArvoreRoute
+  '/poda-de-arvores': typeof PodaDeArvoresRoute
+  '/poda-e-remocao-de-palmeiras': typeof PodaERemocaoDePalmeirasRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/regiao-atendida': typeof RegiaoAtendidaRoute
+  '/remocao-de-arvores': typeof RemocaoDeArvoresRoute
+  '/rocada-e-limpeza-de-terreno': typeof RocadaELimpezaDeTerrenoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privacidade'
+  fullPaths:
+    | '/'
+    | '/autorizacao-para-corte-de-arvore'
+    | '/poda-de-arvores'
+    | '/poda-e-remocao-de-palmeiras'
+    | '/privacidade'
+    | '/regiao-atendida'
+    | '/remocao-de-arvores'
+    | '/rocada-e-limpeza-de-terreno'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacidade'
-  id: '__root__' | '/' | '/privacidade'
+  to:
+    | '/'
+    | '/autorizacao-para-corte-de-arvore'
+    | '/poda-de-arvores'
+    | '/poda-e-remocao-de-palmeiras'
+    | '/privacidade'
+    | '/regiao-atendida'
+    | '/remocao-de-arvores'
+    | '/rocada-e-limpeza-de-terreno'
+  id:
+    | '__root__'
+    | '/'
+    | '/autorizacao-para-corte-de-arvore'
+    | '/poda-de-arvores'
+    | '/poda-e-remocao-de-palmeiras'
+    | '/privacidade'
+    | '/regiao-atendida'
+    | '/remocao-de-arvores'
+    | '/rocada-e-limpeza-de-terreno'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AutorizacaoParaCorteDeArvoreRoute: typeof AutorizacaoParaCorteDeArvoreRoute
+  PodaDeArvoresRoute: typeof PodaDeArvoresRoute
+  PodaERemocaoDePalmeirasRoute: typeof PodaERemocaoDePalmeirasRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  RegiaoAtendidaRoute: typeof RegiaoAtendidaRoute
+  RemocaoDeArvoresRoute: typeof RemocaoDeArvoresRoute
+  RocadaELimpezaDeTerrenoRoute: typeof RocadaELimpezaDeTerrenoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +144,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/autorizacao-para-corte-de-arvore': {
+      id: '/autorizacao-para-corte-de-arvore'
+      path: '/autorizacao-para-corte-de-arvore'
+      fullPath: '/autorizacao-para-corte-de-arvore'
+      preLoaderRoute: typeof AutorizacaoParaCorteDeArvoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/poda-de-arvores': {
+      id: '/poda-de-arvores'
+      path: '/poda-de-arvores'
+      fullPath: '/poda-de-arvores'
+      preLoaderRoute: typeof PodaDeArvoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/poda-e-remocao-de-palmeiras': {
+      id: '/poda-e-remocao-de-palmeiras'
+      path: '/poda-e-remocao-de-palmeiras'
+      fullPath: '/poda-e-remocao-de-palmeiras'
+      preLoaderRoute: typeof PodaERemocaoDePalmeirasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacidade': {
       id: '/privacidade'
       path: '/privacidade'
@@ -65,12 +172,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/regiao-atendida': {
+      id: '/regiao-atendida'
+      path: '/regiao-atendida'
+      fullPath: '/regiao-atendida'
+      preLoaderRoute: typeof RegiaoAtendidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/remocao-de-arvores': {
+      id: '/remocao-de-arvores'
+      path: '/remocao-de-arvores'
+      fullPath: '/remocao-de-arvores'
+      preLoaderRoute: typeof RemocaoDeArvoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rocada-e-limpeza-de-terreno': {
+      id: '/rocada-e-limpeza-de-terreno'
+      path: '/rocada-e-limpeza-de-terreno'
+      fullPath: '/rocada-e-limpeza-de-terreno'
+      preLoaderRoute: typeof RocadaELimpezaDeTerrenoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AutorizacaoParaCorteDeArvoreRoute: AutorizacaoParaCorteDeArvoreRoute,
+  PodaDeArvoresRoute: PodaDeArvoresRoute,
+  PodaERemocaoDePalmeirasRoute: PodaERemocaoDePalmeirasRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  RegiaoAtendidaRoute: RegiaoAtendidaRoute,
+  RemocaoDeArvoresRoute: RemocaoDeArvoresRoute,
+  RocadaELimpezaDeTerrenoRoute: RocadaELimpezaDeTerrenoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
