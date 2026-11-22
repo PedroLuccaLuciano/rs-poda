@@ -7,11 +7,11 @@ import { EMAIL, EMAIL_URL } from "@/lib/email";
 import { WhatsAppButton } from "./WhatsAppButton";
 
 const links = [
-  { href: "#servicos", label: "Serviços" },
-  { href: "#trabalhos", label: "Galeria" },
-  { href: "#clientes", label: "Clientes" },
-  { href: "#area", label: "Onde atendemos" },
-  { href: "#faq", label: "Dúvidas" },
+  { href: "/#servicos", label: "Serviços" },
+  { href: "/#trabalhos", label: "Galeria" },
+  { href: "/#clientes", label: "Clientes" },
+  { href: "/#area", label: "Onde atendemos" },
+  { href: "/#faq", label: "Dúvidas" },
 ];
 
 export function Header() {
@@ -31,7 +31,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:h-20">
-        <a href="#topo" className="flex items-center gap-3" aria-label="RS Poda — início">
+        <a href="/" className="flex items-center gap-3" aria-label="RS Poda — início">
           <img
             src="/images/opt/icone3-h96.webp"
             alt="Logotipo RS Poda"

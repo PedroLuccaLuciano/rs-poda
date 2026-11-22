@@ -233,6 +233,75 @@ export const IMAGES = {
       ]
     }
   },
+  "palmeira-caminhao": {
+    "card": {
+      "width": 899,
+      "height": 450,
+      "widths": [
+        400,
+        640,
+        800
+      ]
+    },
+    "square": {
+      "width": 899,
+      "height": 749,
+      "widths": [
+        400,
+        640,
+        800
+      ]
+    },
+    "full": {
+      "width": 899,
+      "height": 1599,
+      "widths": [
+        400,
+        640,
+        899
+      ]
+    }
+  },
+  "palmeira-folhas": {
+    "square": {
+      "width": 899,
+      "height": 749,
+      "widths": [
+        400,
+        640,
+        800
+      ]
+    },
+    "full": {
+      "width": 899,
+      "height": 1599,
+      "widths": [
+        400,
+        640,
+        899
+      ]
+    }
+  },
+  "palmeira-escalada": {
+    "square": {
+      "width": 899,
+      "height": 749,
+      "widths": [
+        400,
+        640,
+        800
+      ]
+    },
+    "full": {
+      "width": 899,
+      "height": 1599,
+      "widths": [
+        400,
+        640,
+        899
+      ]
+    }
+  },
   "icone3": {
     "h96": {
       "width": 96,

@@ -51,6 +51,10 @@ PHOTOS = {
     "limpeza": ("limpeza.jpg", ["portrait"]),
     "poda-altura": ("poda-altura.jpeg", ["portrait"]),
     "poda-escalada": ("poda-escalada.jpg", ["card", "portrait", "bg"]),
+    # Palmeiras (fotos do dono, 21/11/2026).
+    "palmeira-caminhao": ("palmeira-caminhao.jpg", ["card", "square", "full"]),
+    "palmeira-folhas": ("palmeira-folhas.jpg", ["square", "full"]),
+    "palmeira-escalada": ("palmeira-escalada.jpg", ["square", "full"]),
 }
 
 # Logos: uma versão por altura, ~1,75x a altura exibida no celular.
